@@ -38,7 +38,7 @@ llava_v1_5:
 
 llava_v1_5l:
   model:
-    model_name_or_path: LLaVA_v1_5
+    model_name_or_path: LLaVA_v1_5L
   model_type: open_source_multimodal
   num_gpus: 1
 

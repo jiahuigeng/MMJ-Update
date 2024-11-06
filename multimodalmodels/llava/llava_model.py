@@ -13,7 +13,13 @@ from PIL import Image
 class LLaVA_v1_5(MultiModalModel):
     def __init__(self):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-7b-hf").to('cuda')
+        # self.model = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-7b-hf").to('cuda')
+
+        self.model = LlavaForConditionalGeneration.from_pretrained(
+            "llava-hf/llava-1.5-7b-hf",
+            load_in_4bit=True,
+            device_map="auto"  # Automatically map layers to GPU
+        ).to(self.device)
         self.processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-7b-hf")
         self.normalize = transforms.Normalize(mean=self.processor.image_processor.image_mean, std=self.processor.image_processor.image_std)
         self.preprocess = lambda x: self.processor.image_processor.preprocess(x, do_normalize=False, return_tensors='pt')['pixel_values'][0]
@@ -115,7 +121,12 @@ class LLaVA_v1_5(MultiModalModel):
 class LLaVA_v1_5L(MultiModalModel):
     def __init__(self):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-13b-hf").to('cuda')
+        # self.model = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-13b-hf").to('cuda')
+        self.model = LlavaForConditionalGeneration.from_pretrained(
+            "llava-hf/llava-1.5-13b-hf",
+            load_in_4bit=True,
+            device_map="auto"  # Automatically map layers to GPU
+        ).to(self.device)
         self.processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-13b-hf")
         self.normalize = transforms.Normalize(mean=self.processor.image_processor.image_mean, std=self.processor.image_processor.image_std)
         self.preprocess = lambda x: self.processor.image_processor.preprocess(x, do_normalize=False, return_tensors='pt')['pixel_values'][0]
