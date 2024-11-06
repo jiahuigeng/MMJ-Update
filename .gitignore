@@ -1,0 +1,13 @@
+*.jpg
+*.pyc
+*.png
+*_test_cases.json
+*.out
+*.csv
+data/
+dataset/
+en_core_web_sm-3.7.1/
+demo_case/
+__pycache__/
+*.log
+.vscode/*
