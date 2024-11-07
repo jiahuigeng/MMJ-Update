@@ -81,7 +81,8 @@ class Visual_Adv:
         :return: adv_image
         """
         img = Image.open(image_path).convert('RGB')
-        img = self.model.vis_processor(img).unsqueeze(0)
+        # img = self.model.vis_processor(img).unsqueeze(0)
+        img = self.model.vis_processor(img, return_tensors='pt')["pixel_values"].to(self.model.device)
 
         adv_noise = torch.rand_like(img).to(self.model.device) # [0,1]
         adv_noise.requires_grad_(True)
