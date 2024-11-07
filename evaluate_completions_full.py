@@ -37,10 +37,10 @@ def main():
     args = parse_args()
     print(args)
     
-    # ========== load behaviors (for tags and context strings) ========== #
-    with open(args.behaviors_path, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        behaviors = list(reader)
+    # # ========== load behaviors (for tags and context strings) ========== #
+    # with open(args.behaviors_path, 'r', encoding='utf-8') as f:
+    #     reader = csv.DictReader(f)
+    #     behaviors = list(reader)
     
     # convert to dictionary mapping behavior ID field to behavior dict
     # behaviors = {b['BehaviorID']: b for b in behaviors}

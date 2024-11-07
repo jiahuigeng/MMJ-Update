@@ -1,5 +1,5 @@
 import transformers
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer,AutoModelForCausalLM
 from vllm import LLM, SamplingParams
 import json
 import argparse
@@ -61,8 +61,13 @@ def main():
             clipped_generation = tokenizer.decode(tokenized_text, skip_special_tokens=True)
             completion['generation'] = clipped_generation
 
+    model = AutoModelForCausalLM.from_pretrained(
+    args.cls_path,
+    load_in_4bit=True,
+    device_map="auto"
+    )
     # ========== evaluate completions ========== #
-    cls = LLM(model=args.cls_path, tensor_parallel_size=1)
+    cls = LLM(model=model, tensor_parallel_size=1)
     cls.llm_engine.tokenizer.tokenizer.truncation_side="left"
 
     cls_params = SamplingParams(temperature=0.0, max_tokens=1)

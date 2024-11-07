@@ -2,7 +2,7 @@ target_model: LLaVA_v1_5
 epsilon: 16
 alpha: 1
 n_iters: 5000
-constrained: False
+constrained: True
 batch_size: 1
 image_path: 'data/clean.jpeg'
 target_path: data/derogatory_corpus.csv

@@ -1,6 +1,7 @@
 *.jpg
 *.pyc
 *.png
+*.json
 *_test_cases.json
 *.out
 en_core_web_sm-3.7.1/
